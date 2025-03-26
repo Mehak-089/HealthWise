@@ -16,7 +16,9 @@ symptom_columns = [col for col in df.columns if "Symptom" in col]
 all_symptoms = set()
 
 for col in symptom_columns:
-    all_symptoms.update(str(symptom) for symptom in df[col].unique())  # Convert to string
+    all_symptoms.update(
+        str(symptom) for symptom in df[col].unique()
+    )  # Convert to string
 
 # Remove 'None' and 'nan' if present
 all_symptoms.discard("None")
@@ -42,15 +44,17 @@ if st.button("Predict Disease"):
         for symptom in selected_symptoms:
             if symptom in all_symptoms:
                 input_data[list(all_symptoms).index(symptom)] = 1
-        
+
         # Reshape input and predict
         input_data = input_data.reshape(1, -1)
         predicted_disease = model.predict(input_data)[0]
-        
+
         # Display results
         st.success(f"Predicted Disease: {predicted_disease}")
-        
+
         # Show disease description
-        description = desc_df[desc_df["Disease"] == predicted_disease]["Description"].values
+        description = desc_df[desc_df["Disease"] == predicted_disease][
+            "Description"
+        ].values
         if description:
             st.info(f"Description: {description[0]}")
