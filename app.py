@@ -16,7 +16,7 @@ def get_base64_image(image_path):
 encoded_logo = get_base64_image(logo_path)
 encoded_hero_image = get_base64_image(hero_image_path)
 
-# Create a navigation bar with a search bar
+# Create a navigation bar with a clickable app name
 navbar_html = f"""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
@@ -39,6 +39,14 @@ navbar_html = f"""
         font-size: 24px;
         font-weight: 600;
         color: #333;
+        cursor: pointer;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }}
+    .navbar .app-name:hover {{
+        background-color: #007bff;
+        color: white;
     }}
     .navbar .nav-links {{
         display: flex;
@@ -71,11 +79,11 @@ navbar_html = f"""
 <div class="navbar">
     <div class="left-section">
         <img src="data:image/jpeg;base64,{encoded_logo}" alt="Logo">
-        <div class="app-name">HealthWise</div>
+        <div class="app-name" onclick="location.reload()">HealthWise</div>
     </div>
     <div class="nav-links">
         <a href="#home">Home</a>
-         <a href="#about">About</a>
+        <a href="#about">About</a>
         <input type="text" class="search-bar" placeholder="Search...">
     </div>
 </div>
@@ -132,6 +140,29 @@ hero_section_html = f"""
 </div>
 """
 
-# Render the navigation bar and hero section
+# New section: Explore Our Features
+features_section_html = """
+<style>
+    .features-section {
+        padding: 60px;
+        text-align: center;
+        background-color: #f8f9fa;
+        font-family: 'Poppins', sans-serif;
+    }
+    .features-heading {
+        font-size: 40px;
+        font-weight: bold;
+        font-style: italic;
+        color: #000000; /* Pure Black */
+        margin-bottom: 20px;
+    }
+</style>
+<div class="features-section">
+    <div class="features-heading">Explore Our Features</div>
+</div>
+"""
+
+# Render the navigation bar, hero section, and features section
 st.markdown(navbar_html, unsafe_allow_html=True)
 st.markdown(hero_section_html, unsafe_allow_html=True)
+st.markdown(features_section_html, unsafe_allow_html=True)
