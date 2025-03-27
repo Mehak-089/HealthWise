@@ -86,6 +86,7 @@ navbar_html = f"""
     <div class="nav-links">
         <a href="#home">Home</a>
         <a href="#about">About</a>
+        <a href="#Contact">Contact</a>
         <input type="text" class="search-bar" placeholder="Search...">
     </div>
 </div>
