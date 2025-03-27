@@ -81,7 +81,7 @@ navbar_html = f"""
 </div>
 """
 
-# Hero section with better styling
+# Hero section with subtitle
 hero_section_html = f"""
 <style>
     .hero {{
@@ -89,10 +89,12 @@ hero_section_html = f"""
         width: 100%;
         height: 600px;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
         overflow: hidden;
+        padding: 20px;
     }}
     
     .hero img {{
@@ -102,23 +104,34 @@ hero_section_html = f"""
     }}
     .hero-text {{
         position: absolute;
-        font-size: 60px;
+        font-size: 50px;
         font-weight: bold;
         color: white;
-        font-family:'Arial';
+        font-family: 'Arial';
         font-style: italic;
         text-shadow: 2px 2px 4px #000000;
+    }}
+    .hero-subtext {{
+        position: absolute;
+        top: 55%;
+        font-size: 20px;
+        font-weight: normal;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        text-shadow: 1px 1px 3px #000000;
+        max-width: 80%;
     }}
 </style>
 <div class="hero">
     <img src="data:image/jpeg;base64,{encoded_hero_image}" alt="Health Banner">
     <div class="hero-text">Exploring Your Health Journey</div>
+    <div class="hero-subtext">
+        Explore a wealth of information and tools to manage your well-being effectively. 
+        From predicting potential health risks to understanding disease details, we've got you covered.
+    </div>
 </div>
 """
 
 # Render the navigation bar and hero section
 st.markdown(navbar_html, unsafe_allow_html=True)
 st.markdown(hero_section_html, unsafe_allow_html=True)
-
-
-
