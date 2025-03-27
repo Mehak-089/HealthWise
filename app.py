@@ -5,7 +5,7 @@ import base64
 st.set_page_config(page_title="HealthWise", layout="wide")
 
 # Load and encode the logo image (Replace 'logo.jpg' with the correct path)
-logo_path = "logo.jpg"  
+logo_path = "pictures/logo.jpg"  
 
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
@@ -52,6 +52,13 @@ navbar_html = f"""
         height: 40px;
         width: 40px;
     }}
+    .search-bar {{
+        padding: 5px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 200px;
+    }}
 </style>
 <div class="navbar">
     <div class="left-section">
@@ -61,6 +68,7 @@ navbar_html = f"""
     <div class="nav-links">
         <a href="#home">Home</a>
         <a href="#about">About</a>
+         <input type="text" class="search-bar" placeholder="Search...">
     </div>
 </div>
 """
