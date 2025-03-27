@@ -224,8 +224,9 @@ feature_card_html = f"""
     <div class="feature-card-content">
         <h3>Disease Prediction</h3>
         <p>Estimate the likelihood of developing a specific disease based on your symptoms and health history. Gain insights to manage health risks proactively.</p>
-        <button onclick="alert('Feature Coming Soon!')">Try Now</button>
-    </div>
+        <a href="pages/diseaseprediction.py" target="_blank">
+    <button>Try Now</button>
+</a>
 </div>
 """
 
