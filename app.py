@@ -7,11 +7,15 @@ st.set_page_config(page_title="HealthWise", layout="wide")
 # Load and encode images
 logo_path = "pictures/logo.jpg"
 hero_image_path = "pictures/fp.jpg"
-feature_image_path = "pictures/predict.png"  # Replace with actual image path for the feature card
+feature_image_path = (
+    "pictures/predict.png"  # Replace with actual image path for the feature card
+)
+
 
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
+
 
 # Encode images
 encoded_logo = get_base64_image(logo_path)
@@ -165,8 +169,9 @@ features_section_html = """
 </div>
 """
 
-# --- Feature Card ---
-feature_card_html = f"""
+# --- Feature Cards ---
+# Feature card 1
+feature_card_html1 = f"""
 <style>
     .feature-card {{
         display: flex;
@@ -178,7 +183,7 @@ feature_card_html = f"""
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         padding: 20px;
         margin: 20px auto;
-        width: 60%;
+        width: 80%;
         max-width: 800px;
     }}
 
@@ -231,8 +236,143 @@ feature_card_html = f"""
 </div>
 """
 
+# Feature card 2
+feature_card_html2 = f"""
+<style>
+    .feature-card {{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 20px auto;
+        width: 80%;
+        max-width: 800px;
+    }}
+
+    .feature-card img {{
+        width: 40%;
+        border-radius: 10px;
+        margin-right: 20px;
+    }}
+
+    .feature-card-content {{
+        flex: 1;
+        text-align: left;
+    }}
+
+    .feature-card h3 {{
+        font-size: 22px;
+        color: #404040;
+        margin-bottom: 10px;
+    }}
+
+    .feature-card p {{
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 15px;
+    }}
+
+    .feature-card button {{
+        background-color: #007bff;
+        color: white;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }}
+
+    .feature-card button:hover {{
+        background-color: #0056b3;
+    }}
+</style>
+<div class="feature-card">
+    <img src="data:image/jpeg;base64,{encoded_feature_image}" alt="Feature Image">
+    <div class="feature-card-content">
+        <h3>Precautionary Measures</h3>
+        <p>Discover essential precautions and preventive measures to safeguard against potential health threats.</p>
+        <a href="pages/precautions.py" target="_blank">
+    <button>See</button>
+</a>
+</div>
+"""
+
+# Feature card 3
+feature_card_html3 = f"""
+<style>
+    .feature-card {{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 20px auto;
+        width: 80%;
+        max-width: 800px;
+    }}
+
+    .feature-card img {{
+        width: 40%;
+        border-radius: 10px;
+        margin-right: 20px;
+    }}
+
+    .feature-card-content {{
+        flex: 1;
+        text-align: left;
+    }}
+
+    .feature-card h3 {{
+        font-size: 22px;
+        color: #404040;
+        margin-bottom: 10px;
+    }}
+
+    .feature-card p {{
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 15px;
+    }}
+
+    .feature-card button {{
+        background-color: #007bff;
+        color: white;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }}
+
+    .feature-card button:hover {{
+        background-color: #0056b3;
+    }}
+</style>
+<div class="feature-card">
+    <img src="data:image/jpeg;base64,{encoded_feature_image}" alt="Feature Image">
+    <div class="feature-card-content">
+        <h3>Disease Information</h3>
+        <p>Access comprehensive descriptions of various diseases, including their causes, symptoms, and treatment options.</p>
+        <a href="pages/precautions.py" target="_blank">
+    <button>See</button>
+</a>
+</div>
+"""
+
+
 # --- Render Components ---
 st.markdown(navbar_html, unsafe_allow_html=True)
 st.markdown(hero_section_html, unsafe_allow_html=True)
 st.markdown(features_section_html, unsafe_allow_html=True)
-st.markdown(feature_card_html, unsafe_allow_html=True)
+st.markdown(feature_card_html1, unsafe_allow_html=True)
+st.markdown(feature_card_html2, unsafe_allow_html=True)
+st.markdown(feature_card_html3, unsafe_allow_html=True)
