@@ -7,6 +7,7 @@ st.set_page_config(page_title="HealthWise", layout="wide")
 # Load and encode images
 logo_path = "pictures/logo.jpg"
 hero_image_path = "pictures/fp.jpg"
+feature_image_path = "pictures/predict.png"  # Replace with actual image path for the feature card
 
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
@@ -15,8 +16,9 @@ def get_base64_image(image_path):
 # Encode images
 encoded_logo = get_base64_image(logo_path)
 encoded_hero_image = get_base64_image(hero_image_path)
+encoded_feature_image = get_base64_image(feature_image_path)
 
-# Create a navigation bar with a clickable app name
+# --- Navigation Bar ---
 navbar_html = f"""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
@@ -89,7 +91,7 @@ navbar_html = f"""
 </div>
 """
 
-# Hero section with subtitle
+# --- Hero Section ---
 hero_section_html = f"""
 <style>
     .hero {{
@@ -140,7 +142,7 @@ hero_section_html = f"""
 </div>
 """
 
-# New section: Explore Our Features
+# --- Explore Our Features Section ---
 features_section_html = """
 <style>
     .features-section {
@@ -153,7 +155,7 @@ features_section_html = """
         font-size: 40px;
         font-weight: bold;
         font-style: italic;
-        color: #000000; /* Pure Black */
+        color: #000000;
         margin-bottom: 20px;
     }
 </style>
@@ -162,7 +164,73 @@ features_section_html = """
 </div>
 """
 
-# Render the navigation bar, hero section, and features section
+# --- Feature Card ---
+feature_card_html = f"""
+<style>
+    .feature-card {{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 20px auto;
+        width: 60%;
+        max-width: 800px;
+    }}
+
+    .feature-card img {{
+        width: 40%;
+        border-radius: 10px;
+        margin-right: 20px;
+    }}
+
+    .feature-card-content {{
+        flex: 1;
+        text-align: left;
+    }}
+
+    .feature-card h3 {{
+        font-size: 22px;
+        color: #404040;
+        margin-bottom: 10px;
+    }}
+
+    .feature-card p {{
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 15px;
+    }}
+
+    .feature-card button {{
+        background-color: #007bff;
+        color: white;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }}
+
+    .feature-card button:hover {{
+        background-color: #0056b3;
+    }}
+</style>
+<div class="feature-card">
+    <img src="data:image/jpeg;base64,{encoded_feature_image}" alt="Feature Image">
+    <div class="feature-card-content">
+        <h3>Disease Prediction</h3>
+        <p>Estimate the likelihood of developing a specific disease based on your symptoms and health history. Gain insights to manage health risks proactively.</p>
+        <button onclick="alert('Feature Coming Soon!')">Try Now</button>
+    </div>
+</div>
+"""
+
+# --- Render Components ---
 st.markdown(navbar_html, unsafe_allow_html=True)
 st.markdown(hero_section_html, unsafe_allow_html=True)
 st.markdown(features_section_html, unsafe_allow_html=True)
+st.markdown(feature_card_html, unsafe_allow_html=True)
