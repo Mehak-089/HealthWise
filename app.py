@@ -153,7 +153,7 @@ features_section_html = """
     .features-section {
         padding: 60px;
         text-align: center;
-        background-color: #f8f9fa;
+        background-color: white;
         font-family: 'Poppins', sans-serif;
     }
     .features-heading {
