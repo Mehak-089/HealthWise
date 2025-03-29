@@ -241,6 +241,7 @@ def toggle_card():
 # --- Display Card ---
 st.markdown('<div class="subheading-heading">Common Diseases and Precautions</div>', unsafe_allow_html=True)
 
+
 # Clickable card
 if st.button("🤧 Achoo! Tell Me More", key="click_card"):
     toggle_card()
