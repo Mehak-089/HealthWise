@@ -6,15 +6,21 @@ st.set_page_config(page_title="HealthWise", layout="wide")
 
 # Function to encode images in Base64
 def get_base64_image(image_path):
-    with open(image_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode()
+    try:
+        with open(image_path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode()
+    except FileNotFoundError:
+        return ""  # Return empty string if file is not found
 
-# Load and encode images
-logo_path = "pictures/logo.jpg"
-hero_image_path = "pictures/fp.jpg"
+# Image Paths
+image_paths = {
+    "logo": "pictures/logo.jpg",
+    "hero": "pictures/fp.jpg",
+    "varicose": "pictures/varicoseveins.jpg"
+}
 
-encoded_logo = get_base64_image(logo_path)
-encoded_hero_image = get_base64_image(hero_image_path)
+# Encoding images
+encoded_images = {name: get_base64_image(path) for name, path in image_paths.items()}
 
 # --- Navigation Bar ---
 st.markdown(f"""
@@ -99,7 +105,7 @@ st.markdown(f"""
 
 <div class="navbar">
     <div class="left-section">
-        <img src="data:image/jpeg;base64,{encoded_logo}" alt="Logo">
+        <img src="data:image/jpeg;base64,{encoded_images['logo']}" alt="Logo">
         <div class="app-name" onclick="location.reload()">HealthWise</div>
     </div>
     <div class="nav-links">
@@ -153,7 +159,7 @@ st.markdown(f"""
     }}
 </style>
 <div class="hero">
-    <img src="data:image/jpeg;base64,{encoded_hero_image}" alt="Health Banner">
+    <img src="data:image/jpeg;base64,{encoded_images['hero']}" alt="Health Banner">
     <div class="hero-text">Exploring Your Health Journey</div>
     <div class="hero-subtext">
         Explore a wealth of information and tools to manage your well-being effectively. 
@@ -161,3 +167,115 @@ st.markdown(f"""
     </div>
 </div>
 """, unsafe_allow_html=True)
+
+# --- Flip Card Section ---
+st.markdown(f'''
+    <style>
+        .flip-card {{
+            background-color: transparent;
+            width: 80%;
+            max-width: 800px;
+            height: 350px;
+            perspective: 1000px;
+            margin: 40px auto;
+        }}
+
+        .flip-card-inner {{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }}
+
+        .flip-card:hover .flip-card-inner {{
+            transform: rotateY(180deg);
+        }}
+
+        .flip-card-front, .flip-card-back {{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }}
+
+        .flip-card-front {{
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }}
+
+        .flip-card-front img {{
+            width: 40%;
+            border-radius: 10px;
+            margin-right: 20px;
+            object-fit: cover;
+            height: 100%;
+        }}
+
+        .flip-card-front-content {{
+            flex: 1;
+            text-align: left;
+            padding: 10px;
+        }}
+
+        .flip-card-back {{
+            background-color: #f8f9fa;
+            transform: rotateY(180deg);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }}
+
+        .flip-card h3 {{
+            font-size: 22px;
+            color: #404040;
+            margin-bottom: 15px;
+        }}
+
+        .flip-card p {{
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }}
+
+        .flip-card ul {{
+            text-align: left;
+            padding-left: 20px;
+        }}
+
+        .flip-card li {{
+            margin-bottom: 8px;
+        }}
+    </style>
+
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="data:image/jpeg;base64,{encoded_images['varicose']}" alt="Varicose Veins">
+                <div class="flip-card-front-content">
+                    <h3>Varicose Veins</h3>
+                    <p>Varicose veins are enlarged, swollen, twisted veins that often appear blue or dark purple. They occur when faulty valves in the veins allow blood to flow in the wrong direction.</p>
+                </div>
+            </div>
+            <div class="flip-card-back">
+                <h3>Detailed Information</h3>
+                <p><strong>Common Symptoms:</strong></p>
+                <ul>
+                    <li>Aching, heavy and uncomfortable legs</li>
+                    <li>Swollen feet and ankles</li>
+                    <li>Burning or throbbing sensation</li>
+                    <li>Muscle cramp in your legs</li>
+                    <li>Dry, itchy and thin skin over the affected vein</li>
+                </ul>
+                <p><strong>Treatment Options:</strong> Compression stockings, laser treatments, sclerotherapy, or surgery in severe cases.</p>
+            </div>
+        </div>
+    </div>
+''', unsafe_allow_html=True)
